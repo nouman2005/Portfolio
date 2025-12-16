@@ -52,24 +52,14 @@ export default function Home() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
+          transition={{ delay: 0.6 }}
           className='mt-8 text-gray-300 text-base md:text-lg max-w-4xl mx-auto leading-relaxed'>
-          I am a passionate{" "}
-          <span className='text-white font-medium'>Frontend Developer</span>
-          with a strong focus on building visually appealing, responsive, and
-          performance-optimized web applications. I specialize in transforming
-          complex ideas into clean, user-friendly interfaces using modern
-          technologies like <span className='text-indigo-400'>
-            React JS
-          </span>{" "}
-          and
-          <span className='text-sky-400'> Tailwind CSS</span>.
-          <br />
-          <br />
-          My goal is to craft seamless digital experiences with smooth
-          animations, scalable code architecture, and pixel-perfect design. I
-          continuously learn and adapt to new trends to deliver professional,
-          production-ready solutions that create real impact.
+          I’m a{" "}
+          <span className='text-white font-medium'>Frontend Developer</span>{" "}
+          focused on creating clean, scalable, and visually engaging user
+          interfaces. I specialize in building responsive, animation-rich, and
+          production-ready web applications that deliver seamless and intuitive
+          user experiences across all devices.
         </motion.p>
 
         {/* CTA Button */}
@@ -79,13 +69,13 @@ export default function Home() {
           transition={{ delay: 0.9 }}
           className='mt-10 flex justify-center'>
           <a
-            href='/Nouman-Ansari-CV.pdf'
-            download
+            href='/Nouman-Resume.pdf'
+            download='Nouman_Ansari_Resume.pdf'
             className='group inline-flex items-center gap-3
-                       bg-gradient-to-r from-indigo-500 to-pink-500
-                       px-8 py-4 rounded-full font-semibold
-                       shadow-lg hover:shadow-pink-500/40
-                       hover:scale-105 transition-all duration-300'>
+             bg-gradient-to-r from-indigo-500 to-pink-500
+             px-8 py-4 rounded-full font-semibold
+             shadow-lg hover:shadow-pink-500/40
+             hover:scale-105 transition-all duration-300'>
             <FaDownload className='text-lg group-hover:animate-bounce' />
             Download CV
           </a>
@@ -97,34 +87,45 @@ export default function Home() {
         </h3>
 
         {/* Infinite Skills Carousel */}
-        <div className='mt-12 overflow-hidden relative'>
+        <div className='mt-14 relative overflow-hidden'>
+          {/* Gradient Fade Edges */}
+          <div className='pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-black to-transparent z-10' />
+          <div className='pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-black to-transparent z-10' />
+
           <motion.div
             className='flex gap-10 w-max'
             animate={{ x: ["0%", "-50%"] }}
             transition={{
               repeat: Infinity,
-              duration: 22,
+              repeatType: "loop",
+              duration: 30, // slower = smoother
               ease: "linear",
-            }}>
+            }}
+            whileHover={{ animationPlayState: "paused" }} // pause on hover
+          >
             {[...skills, ...skills].map((skill, index) => {
               const Icon = skill.icon;
               return (
-                <div
+                <motion.div
                   key={index}
-                  className='group min-w-[150px] flex flex-col items-center
-                             px-6 py-6 rounded-2xl
-                             bg-white/5 backdrop-blur
-                             border border-white/10
-                             hover:border-indigo-500/40
-                             hover:shadow-[0_0_25px_rgba(99,102,241,0.35)]
-                             transition-all duration-300'>
+                  whileHover={{ y: -6, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  className='group min-w-[160px] flex flex-col items-center
+                     px-7 py-7 rounded-2xl
+                     bg-white/5 backdrop-blur-md
+                     border border-white/10
+                     hover:border-indigo-500/40
+                     hover:shadow-[0_10px_35px_rgba(99,102,241,0.35)]
+                     transition-colors duration-300'>
                   <Icon
-                    className={`text-5xl ${skill.color} group-hover:scale-110 transition`}
+                    className={`text-5xl ${skill.color}
+                        transition-transform duration-300
+                        group-hover:scale-110`}
                   />
-                  <span className='mt-3 text-sm font-medium text-gray-300'>
+                  <span className='mt-4 text-sm font-medium text-gray-300 tracking-wide'>
                     {skill.name}
                   </span>
-                </div>
+                </motion.div>
               );
             })}
           </motion.div>
