@@ -1,16 +1,29 @@
-import "./App.css";
 import Navbar from "./Components/Navbar";
-import About from "./Pages/About";
 import Home from "./Pages/Home";
+import About from "./Pages/About";
 import Skills from "./Pages/Skills";
+import Projects from "./Pages/Projects";
+import Contact from "./Pages/Contact";
 
 function App() {
   return (
     <>
       <Navbar />
-      <Home />
-      <About />
-      <Skills />
+      <section id='home'>
+        <Home />
+      </section>
+      <section id='about'>
+        <About />
+      </section>
+      <section id='skills'>
+        <Skills />
+      </section>
+      <section id='projects'>
+        <Projects />
+      </section>
+      <section id='contact'>
+        <Contact />
+      </section>
     </>
   );
 }
